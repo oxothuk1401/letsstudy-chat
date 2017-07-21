@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="MySQL - reg@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
+    <schema id="1" name="reg">
+      <visible>1</visible>
+    </schema>
+    <schema id="2" name="griizlytest"/>
+    <schema id="3" name="information_schema"/>
+    <schema id="4" name="mysql"/>
+    <schema id="5" name="oxothukdb"/>
+    <schema id="6" name="payments_2"/>
+    <schema id="7" name="performance_schema"/>
+    <schema id="8" name="reports"/>
+    <schema id="9" name="scand"/>
+    <schema id="10" name="sys"/>
+    <table id="11" parent="1" name="chat"/>
+    <table id="12" parent="1" name="roles"/>
+    <table id="13" parent="1" name="user_roles"/>
+    <table id="14" parent="1" name="users"/>
+    <column id="15" parent="11" name="id_mssg">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="16" parent="11" name="Id_student">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="17" parent="11" name="id_teacher">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="18" parent="11" name="message">
+      <data-type>varchar(1000)|0</data-type>
+    </column>
+    <column id="19" parent="11" name="date">
+      <data-type>varchar(30)|0</data-type>
+    </column>
+    <column id="20" parent="11" name="username">
+      <data-type>varchar(30)|0</data-type>
+    </column>
+    <column id="21" parent="11" name="img">
+      <data-type>varchar(30)|0</data-type>
+    </column>
+    <key id="22" parent="11" name="PRIMARY">
+      <columns>id_mssg</columns>
+      <primary>1</primary>
+    </key>
+    <column id="23" parent="12" name="id">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="24" parent="12" name="role">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <key id="25" parent="12" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="26" parent="13" name="user_id">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="27" parent="13" name="role_id">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <index id="28" parent="13" name="FK_5q4rc4fh1on6567qk69uesvyf">
+      <columns>role_id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="29" parent="13" name="PRIMARY">
+      <columns>user_id
+role_id</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="30" parent="13" name="FK_g1uebn6mqk9qiaw45vnacmyo2">
+      <columns>user_id</columns>
+      <ref-key>~.users.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="31" parent="13" name="FK_5q4rc4fh1on6567qk69uesvyf">
+      <columns>role_id</columns>
+      <ref-key>~.roles.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <column id="32" parent="14" name="id">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="33" parent="14" name="email">
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="34" parent="14" name="name">
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="35" parent="14" name="password">
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="36" parent="14" name="phone_number">
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="37" parent="14" name="surname">
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="38" parent="14" name="user_name">
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <index id="39" parent="14" name="UK_2wed70dxbt5mep9rgdoydv1yb">
+      <columns>phone_number</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <index id="40" parent="14" name="UK_avh1b2ec82audum2lyjx2p1ws">
+      <columns>email</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="41" parent="14" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <key id="42" parent="14" name="UK_avh1b2ec82audum2lyjx2p1ws">
+      <columns>email</columns>
+      <underlying-index>UK_avh1b2ec82audum2lyjx2p1ws</underlying-index>
+    </key>
+    <key id="43" parent="14" name="UK_2wed70dxbt5mep9rgdoydv1yb">
+      <columns>phone_number</columns>
+      <underlying-index>UK_2wed70dxbt5mep9rgdoydv1yb</underlying-index>
+    </key>
+  </database-model>
+</dataSource>
