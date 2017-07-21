@@ -1,14 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8" %>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LETSSTUDY message</title>
+    <title>LETSSTUDY главная</title>
 
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.2.0.js"></script>
 
@@ -21,15 +19,21 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/index.css">
 </head>
 <body>
-В стадии разработки
-<br>
-${message}
-<br>
-${sessionScope.chat.message}
-${sessionScope.chat.username}
-${sessionScope.chat.date}
-
+<%@ include file="include/header.jsp" %>
+<div>
+    <a href="${pageContext.request.contextPath}/show_profile"><p style="color: black" >PROFILE</p></a>
+</div>
+Вы успешно зарагестрированны в качестве учителя<br>
+MOdelAtribute<br>
+    Ваше имя пользователя: ${teacherModel.username}<br>
+    Ваш email: ${teacherModel.email}<br>
+    Ваш пароль: ${teacherModel.password}<hr>
+Session<br>
+    Ваше имя пользователя: ${sessionScope.teacherSession.username}<br>
+    Ваш email: ${sessionScope.userSession.email}<br>
+    Ваш пароль: ${sessionScope.userSession.password}<br>
 </body>
 </html>

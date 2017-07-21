@@ -55,19 +55,20 @@
 								        	</div>
 								        </div>
 								        <div class="modal-body modalBodyStyle">
-								        	<form role="form">
+								        	<form role="form" action="/regist_teacher" method="POST">
 									        	<div class="form-group">
-									          		<input type="email" class="form-control" id="usrEmail" placeholder="Эл. адрес" required>
+									          		<input type="email" class="form-control" name="teachEmail" id="teachEmail" placeholder="Эл. адрес" required>
 									          	</div>
 									            <div class="form-group">
-									            	<input type="text" class="form-control" id="usrName" placeholder="Имя пользователя" required>
+									            	<input type="text" class="form-control" name="teachName" id="teachName" placeholder="Имя пользователя" required>
 									            </div>
 									            <div class="form-group">
-									            	<input type="password" class="form-control" id="userPsw" placeholder="Пароль" required>
+									            	<input type="password" class="form-control" name="teachPsw" id="teachPsw" placeholder="Пароль" required>
 									            </div>
 									            <div class="form-group">
-									            	<input type="password" class="form-control" id="confirmUserPsw" placeholder="Подтвердите пороль " required>
+									            	<input type="password" class="form-control" id="confirmTeachPsw" placeholder="Подтвердите пороль " required>
 									            </div>
+													<input type="hidden" name="role" value="teacher">
 									            	<button type="submit" class="btn btn-block btnBlack">Завести аккаунт</button>
 								        	</form>
 								        </div>
@@ -95,20 +96,21 @@
 								        	</div>
 								        </div>
 								        <div class="modal-body modalBodyStyle">
-								        	<form role="form">
+								        	<form role="form" action="/regist_user" method="POST">
 									        	<div class="form-group">
-									          		<input type="email" class="form-control" id="usrEmail" placeholder="Эл. адрес" required>
+									          		<input type="email" class="form-control" name="userEmail" id="userEmail" placeholder="Эл. адрес" required>
 									          	</div>
 									            <div class="form-group">
-									            	<input type="text" class="form-control" id="usrName" placeholder="Имя пользователя" required>
+									            	<input type="text" class="form-control" name="userName" id="userName" placeholder="Имя пользователя" required>
 									            </div>
 									            <div class="form-group">
-									            	<input type="password" class="form-control" id="userPsw" placeholder="Пароль" required>
+									            	<input type="password" class="form-control" name="userPsw" id="userPsw" placeholder="Пароль" required>
 									            </div>
 									            <div class="form-group">
 									            	<input type="password" class="form-control" id="confirmUserPsw" placeholder="Подтвердите пороль " required>
 									            </div>
-									            	<button type="submit" class="btn btn-block btnBlack">Завести аккаунт</button>
+													<input type="hidden" name="role" value="user">
+												<button type="submit" class="btn btn-block btnBlack">Завести аккаунт</button>
 								        	</form>
 								        </div>
 							      	</div>

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8" %>
 
@@ -27,9 +28,25 @@
 
 <body>
 <%@ include file="include/header.jsp" %>
-<div class="container">
-    <img src="/resources/images/temporary/profile1.jpg" width="1142" height="2048">
-</div>
+Session<br>
+Ваше имя пользователя: ${sessionScope.userSession.username}<br>
+Ваш email: ${sessionScope.userSession.email}<br>
+Ваш пароль: ${sessionScope.userSession.password}<br>
+Ваш роль: ${sessionScope.userSession.role}<br>
+<c:if test="${sessionScope.userSession.role eq 'teacher'}">
+        <%@ include file="teacher_part_anketa.jsp" %>
+    <div class="container">
+        <img src="/resources/images/temporary/profile1.jpg" width="1142" height="2048">
+    </div>
+</c:if>
+<c:if test="${sessionScope.userSession.role eq 'user'}">
+    <%@ include file="user_part_anketa.jsp" %>
+</c:if>
+
+<c:if test="${sessionScope.userSession.role eq 'admin'}">
+    <%@ include file="admin_part_anketa.jsp" %>
+</c:if>
+
 
 </body>
 </html>

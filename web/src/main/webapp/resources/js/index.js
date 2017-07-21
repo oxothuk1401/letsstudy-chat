@@ -8,6 +8,8 @@ $(document).ready(function(){
     $("#regStudent").click(function(){
         $("#studentModal").modal();
     });
+
+
 });
 
 var password = document.getElementById("userPsw"), 
