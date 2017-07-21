@@ -9,6 +9,10 @@ $(document).ready(function(){
         $("#studentModal").modal();
     });
 
+    $("#autorization").click(function(){
+        $("#autorizationModal").modal();
+    });
+
 
 });
 
