@@ -37,6 +37,19 @@ public class LoginController {
     public String search() {
         return "search";
     }
+    @RequestMapping(value = "/show_video", method = RequestMethod.GET)
+    public String showVideo() {
+        return "show_video";
+    }
+    @RequestMapping(value = "/show_profile", method = RequestMethod.GET)
+    public String showProfile() {
+        return "show_profile";
+    }
+
+    @RequestMapping(value = "/show_calendar", method = RequestMethod.GET)
+    public String showCalendar() {
+        return "show_calendar";
+    }
 
     @RequestMapping(value = "/time", method = RequestMethod.GET)
     public ModelAndView time() {
@@ -52,7 +65,7 @@ public class LoginController {
     @RequestMapping(value = "/show_my_chats", method = RequestMethod.POST)
     public ModelAndView showMyChats() {
         ModelAndView modelAndView = new ModelAndView();
-        List res = sessionFactory.getCurrentSession().createQuery("from Chat group by img").list();
+        List res = sessionFactory.getCurrentSession().createQuery("from Chat").list();
 //        List res = sessionFactory.getCurrentSession().createQuery("from Chat GROUP BY img").list();
 //        List<Chat> res = sessionFactory.getCurrentSession().createSQLQuery("Select * from reg.chat GROUP BY img").list();
         modelAndView.addObject("res", res);

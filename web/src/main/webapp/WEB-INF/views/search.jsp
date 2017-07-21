@@ -35,7 +35,7 @@
 				</div>
 				<div class="h1 col-xs-12 col-md-3 centered">
 					<div class="row">
-						<a href="#"><img class="col-xs-3 col-md-3" src="/resources/images/icons/calendar.png"></a>
+						<a href="/show_calendar"><img class="col-xs-3 col-md-3" src="/resources/images/icons/calendar.png"></a>
 						<a href="#"><img class="col-xs-3 col-md-3" src="/resources/images/icons/notice.png"></a>
 						<a href="#"><img class="col-xs-3 col-md-3" src="/resources/images/icons/message.png"></a>
 						<a href="#"><img class="col-xs-3 col-md-3" src="/resources/images/icons/accaunt.png"></a>
@@ -269,8 +269,8 @@
 				<div class="row" style="height: 200px; border-top: 1px solid #DBDBDB; padding-bottom: 10px; margin-bottom: 10px;">
 					<div class="col-xs-5 col-md-2" style="padding-top: 20px;">
 						<div style="text-align: center;">
-							<a href="#" title="Перейти на профиль"><img src="/resources/images/teacher/teacher1.png"></a>
-							<a href="#" title="Показать видео"><img src="/resources/images/icons/playVideo.png" style="position: relative; left: -20px; top: -22px;"></a>
+							<a href="/show_profile" title="Перейти на профиль"><img src="/resources/images/teacher/teacher1.png"></a>
+							<a href="/show_video" title="Показать видео"><img src="/resources/images/icons/playVideo.png" style="position: relative; left: -20px; top: -22px;"></a>
 							<h4 style="margin-top: -15px;">online</h4>
 						</div>
 					</div>
@@ -320,7 +320,9 @@
 						<h4 style="color: #1C3075;">бесплатный пробный<br> урок (30 мин)</h4>
 						<div class="row">
 							<div class="col-xs-4 col-md-4"></div>
-							<div class="col-xs-2 col-md-2"><img src="/resources/images/icons/skype.png" class="btn" title="skype"></div>
+							<div class="col-xs-2 col-md-2"><img src="/resources/images/icons/skype.png" class="btn" title="skype">
+
+							</div>
 							<div class="col-xs-2 col-md-2"><img src="/resources/images/icons/chat.png" class="btn" title="чат"></div>
 						</div>
 					</div>
