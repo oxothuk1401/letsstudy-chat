@@ -30,7 +30,7 @@
 <div class="container">
     <header class="marginBottom">
         <div class="row">
-            <div class="h1 col-xs-12 col-md-3"><strong><a href="index.jsp">LETSSTUDY</a></strong></div>
+            <div class="h1 col-xs-12 col-md-3"><strong><a href="/">LETSSTUDY</a></strong></div>
             <div class="h1 col-xs-12 col-md-6" style="font-size: 25px;">
                 <a href="#">
                     <img src="/resources/images/icons/search.png">
@@ -355,14 +355,6 @@
                                             <input type="hidden" name="img" value="teacher4.png">
                                             <button type="submit" class="btn btn-block btnBlack">Отправить сообщение</button>
                                         </form>
-                                        <%--<form role="form">--%>
-                                            <%--<div class="form-group">--%>
-                                                <%--<input type="text" class="form-control" id="messText"--%>
-                                                       <%--placeholder="ваше сообщение" required>--%>
-                                            <%--</div>--%>
-                                            <%--<button type="submit" class="btn btn-block btnBlack">Отправить сообщение--%>
-                                            <%--</button>--%>
-                                        <%--</form>--%>
                                     </div>
                                 </div>
                             </div>
@@ -380,5 +372,6 @@
 <footer></footer>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/search.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/index.js"></script>
 </body>
 </html>

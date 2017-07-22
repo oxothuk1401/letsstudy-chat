@@ -7,7 +7,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,7 +18,6 @@ import java.util.List;
 @Controller
 @SessionAttributes("sendMessage")
 public class LoginController {
-    private String localPer;
 
     @Autowired
     SessionFactory sessionFactory;
@@ -131,7 +129,6 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         Query query = sessionFactory.getCurrentSession().createQuery("from Chat WHERE img = :img")
                 .setParameter("img", img);
-        localPer = img;
         List<Chat> showThisChat = query.list();
         List res = sessionFactory.getCurrentSession().createQuery("from Chat").list();
 //        List res = sessionFactory.getCurrentSession().createQuery("from Chat GROUP BY img").list();
