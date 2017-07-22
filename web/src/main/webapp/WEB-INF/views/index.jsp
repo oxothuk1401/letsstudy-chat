@@ -40,8 +40,12 @@
             <div class="col-xs-12 col-md-12">
                 <div class="row">
                     <div class="col-xs-12 col-md-6 text-center">
-                        <button type="button" class="btn btn-default marginBottom15px" id="regTeacher"><local:message code="index.reg.teacher"/>
+                        <button type="button" class="btn btn-default marginBottom15px" id="regTeacher"><local:message
+                                code="index.reg.teacher"/>
                         </button>
+                        <c:if test="${requestScope.error}">
+                            <h4 style="color: red;"> <local:message code="index.autoriz.user.error.duplicate"/></h4>
+                        </c:if>
                     </div>
 
                     <!-- Modal for teacher-->
@@ -52,7 +56,8 @@
                             <div class="modal-content">
                                 <div class="modal-header modalHeaderStyle">
                                     <p class="fontSize24px text-left"><local:message code="index.teacher"/></p>
-                                    <p class="text-center fontSize30px"><local:message code="index.createAnAccount"/></p>
+                                    <p class="text-center fontSize30px"><local:message
+                                            code="index.createAnAccount"/></p>
                                     <div class="text-center">
                                         <img src="/resources/images/icons/gplus.png"
                                              class="btn padding0 marginRight20px">
@@ -65,23 +70,30 @@
                                 <div class="modal-body modalBodyStyle">
                                     <form role="form" action="/regist_teacher" method="POST">
                                         <div class="form-group">
+                                            <p id="teacherEmailMess">.</p>
                                             <input type="email" class="form-control" name="teachEmail" id="teachEmail"
-                                                   placeholder="<local:message code="index.placeholder.email"/>" required>
+                                                   onkeyup="doAjaxTeacher()"
+                                                   placeholder="<local:message code="index.placeholder.email"/>"
+                                                   required>
                                         </div>
                                         <div class="form-group">
                                             <input type="text" class="form-control" name="teachName" id="teachName"
-                                                   placeholder="<local:message code="index.placeholder.username"/>" required>
+                                                   placeholder="<local:message code="index.placeholder.username"/>"
+                                                   required>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control" name="teachPsw" id="teachPsw"
-                                                   placeholder="<local:message code="index.placeholder.password"/>" required>
+                                                   placeholder="<local:message code="index.placeholder.password"/>"
+                                                   required>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control" id="confirmTeachPsw"
-                                                   placeholder="<local:message code="index.placeholder.password_conf"/>" required>
+                                                   placeholder="<local:message code="index.placeholder.password_conf"/>"
+                                                   required>
                                         </div>
                                         <input type="hidden" name="role" value="teacher">
-                                        <button type="submit" class="btn btn-block btnBlack"><local:message code="index.createAnAccount"/></button>
+                                        <button type="submit" class="btn btn-block btnBlack"><local:message
+                                                code="index.createAnAccount"/></button>
                                     </form>
                                 </div>
                             </div>
@@ -109,13 +121,16 @@
                                     <form role="form" action="/autorization" method="POST">
                                         <div class="form-group">
                                             <input type="email" class="form-control" name="autEmail" id="autEmail"
-                                                   placeholder="<local:message code="index.placeholder.email"/>" required>
+                                                   placeholder="<local:message code="index.placeholder.email"/>"
+                                                   required>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control" name="autPsw" id="autPsw"
-                                                   placeholder="<local:message code="index.placeholder.password"/>" required>
+                                                   placeholder="<local:message code="index.placeholder.password"/>"
+                                                   required>
                                         </div>
-                                        <button type="submit" class="btn btn-block btnBlack"><local:message code="index.logIn"/></button>
+                                        <button type="submit" class="btn btn-block btnBlack"><local:message
+                                                code="index.logIn"/></button>
                                     </form>
                                 </div>
                             </div>
@@ -123,8 +138,12 @@
                     </div>
 
                     <div class="col-xs-12 col-md-6  text-center">
-                        <button type="button" class="btn btn-default marginBottom15px" id="regStudent"><local:message code="index.reg.student"/>
+                        <button type="button" class="btn btn-default marginBottom15px" id="regStudent"><local:message
+                                code="index.reg.student"/>
                         </button>
+                        <c:if test="${requestScope.error}">
+                            <h4 style="color: red;"> <local:message code="index.autoriz.user.error.duplicate"/></h4>
+                        </c:if>
                     </div>
 
                     <!-- Modal for student-->
@@ -135,7 +154,8 @@
                             <div class="modal-content">
                                 <div class="modal-header modalHeaderStyle">
                                     <p class="fontSize24px text-left"><local:message code="index.student"/></p>
-                                    <p class="text-center fontSize30px"><local:message code="index.createAnAccount"/></p>
+                                    <p class="text-center fontSize30px"><local:message
+                                            code="index.createAnAccount"/></p>
                                     <div class="text-center">
                                         <img src="/resources/images/icons/gplus.png"
                                              class="btn padding0 marginRight20px">
@@ -148,23 +168,30 @@
                                 <div class="modal-body modalBodyStyle">
                                     <form role="form" action="/regist_user" method="POST">
                                         <div class="form-group">
-                                            <input type="email" class="form-control" name="userEmail" id="userEmail"
-                                                   placeholder="<local:message code="index.placeholder.email"/>" required>
+                                            <p id="userEmailMess">.</p>
+                                            <input type="email" class="form-control" name="userEmail" onkeyup="doAjax()"
+                                                   id="userEmail"
+                                                   placeholder="<local:message code="index.placeholder.email"/>"
+                                                   required>
                                         </div>
                                         <div class="form-group">
                                             <input type="text" class="form-control" name="userName" id="userName"
-                                                   placeholder="<local:message code="index.placeholder.username"/>" required>
+                                                   placeholder="<local:message code="index.placeholder.username"/>"
+                                                   required>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control" name="userPsw" id="userPsw"
-                                                   placeholder="<local:message code="index.placeholder.password"/>" required>
+                                                   placeholder="<local:message code="index.placeholder.password"/>"
+                                                   required>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control" id="confirmUserPsw"
-                                                   placeholder="<local:message code="index.placeholder.password_conf"/>" required>
+                                                   placeholder="<local:message code="index.placeholder.password_conf"/>"
+                                                   required>
                                         </div>
                                         <input type="hidden" name="role" value="user">
-                                        <button type="submit" class="btn btn-block btnBlack"><local:message code="index.createAnAccount"/></button>
+                                        <button type="submit" id="sub1" class="btn btn-block btnBlack"><local:message
+                                                code="index.createAnAccount"/></button>
                                     </form>
                                 </div>
                             </div>
@@ -386,5 +413,6 @@
 
 <%@ include file="include/footer.jsp" %>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/index.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/emailVerification.js"></script>
 </body>
 </html>

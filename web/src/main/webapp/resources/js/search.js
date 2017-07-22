@@ -11,8 +11,24 @@ $(document).ready(function() {
   	});
 
 	// рейтинг звезд
+	// отправка сообщения
 	$("#newMess").click(function(){
 		$("#messModal").modal();
 	});
-	
+
+	// просмотр видео
+	$("#video").click(function(){
+		$("#videoModal").modal();
+	});
+
+	// просмотр календаря
+	$("#calendar").click(function(){
+		$("#calendarModal").modal();
+	});
+
+	// оплата
+	$("#pay").click(function(){
+		$("#payModal").modal();
+	});
+
 });

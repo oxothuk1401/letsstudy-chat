@@ -2,14 +2,18 @@ package com.letsstudy.controller;
 
 import com.letsstudy.entity.Chat;
 import com.letsstudy.entity.User;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
@@ -46,11 +50,6 @@ public class LoginController {
         return "search";
     }
 
-    //переход на страницу просмотра видео
-    @RequestMapping(value = "/show_video", method = RequestMethod.GET)
-    public String showVideo() {
-        return "show_video";
-    }
 
     //переход на страницу просмотра профиля учителя
     @RequestMapping(value = "/show_profile", method = RequestMethod.GET)
@@ -64,14 +63,61 @@ public class LoginController {
         return "show_calendar";
     }
 
+    @RequestMapping(value = "/checkEmail", method = RequestMethod.GET, produces = { "text/html; charset=UTF-8" })
+    public @ResponseBody
+    String checkStrength(@RequestParam String userEmail) {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class);
+        criteria.add(Restrictions.eq("email", userEmail));
+        String result = "<p style=\"color:%s;\">%s</p>";
+        User user = (User) criteria.uniqueResult();
+        if(user == null){
+            return String.format(result, "#0BFF0C", "Логин свободен");
+        }else {
+            return String.format(result, "#FF0000", "Логин занят");
+        }
+    }
 
+
+    @Transactional
+    @RequestMapping(value = "/autorization", method = RequestMethod.POST)
+    public ModelAndView autorization(@RequestParam("autEmail") String autEmail,
+                                     @RequestParam("autPsw") String autPsw,
+                                     HttpSession httpSession) {
+        ModelAndView modelAndView = new ModelAndView();
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class);
+        criteria.add(Restrictions.eq("email", autEmail));
+        criteria.add(Restrictions.eq("password", autPsw));
+        String sql = "UPDATE reg.users SET status = 1 WHERE email='" + autEmail +"'";
+        sessionFactory.getCurrentSession().createSQLQuery(sql).executeUpdate();
+        User user = (User) criteria.uniqueResult();
+        if(user == null){
+            System.out.println("нет пользователя");
+            modelAndView.setViewName("index");
+        }else {
+            httpSession.setAttribute("userSession", user);
+            modelAndView.setViewName("user_page");
+        }
+        return modelAndView;
+    }
+    @RequestMapping(value = "/invalidate", method = RequestMethod.GET)
+    public ModelAndView invalidate(@RequestParam("email") String autEmail,
+            HttpSession httpSession) {
+        ModelAndView modelAndView = new ModelAndView();
+        String sql = "UPDATE reg.users SET status = 0 WHERE email='" + autEmail +"'";
+        sessionFactory.getCurrentSession().createSQLQuery(sql).executeUpdate();
+        httpSession.invalidate();
+        modelAndView.setViewName("index");
+        return modelAndView;
+    }
+
+    //регистрация
     @Transactional
     @RequestMapping(value = "/regist_user", method = RequestMethod.POST)
     public ModelAndView registrUser(@RequestParam("userEmail") String userEmail,
                                     @RequestParam("userName") String userName,
                                     @RequestParam("role") String role,
                                     @RequestParam("userPsw") String userPsw,
-                                    HttpSession httpSession) {
+                                    HttpSession httpSession, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         User user = new User();
         user.setEmail(userEmail);
@@ -80,11 +126,18 @@ public class LoginController {
         user.setRole(role);
         String sql = "INSERT INTO reg.users (email, user_name, password, role) " +
                 "VALUES (" + "'" + userEmail + "','" + userName + "','" + userPsw + "','" + role + "')";
-        sessionFactory.getCurrentSession().createSQLQuery(sql).executeUpdate();
-        httpSession.setAttribute("userSession", user);
-        modelAndView.addObject("userModel", user);
-        modelAndView.setViewName("user_page");
-        return modelAndView;
+        try{
+            sessionFactory.getCurrentSession().createSQLQuery(sql).executeUpdate();
+            httpSession.setAttribute("userSession", user);
+            modelAndView.setViewName("user_page");
+            return modelAndView;
+        } catch (Exception e){
+            request.setAttribute("error", true);
+            modelAndView.setViewName("index");
+            return modelAndView;
+        }
+
+
     }
 
     @Transactional
@@ -93,7 +146,7 @@ public class LoginController {
                                        @RequestParam("teachName") String teachName,
                                        @RequestParam("role") String role,
                                        @RequestParam("teachPsw") String teachPsw,
-                                       HttpSession httpSession) {
+                                       HttpSession httpSession, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         User user = new User();
         user.setEmail(teachEmail);
@@ -102,22 +155,25 @@ public class LoginController {
         user.setRole(role);
         String sql = "INSERT INTO reg.users (email, user_name, password, role) " +
                 "VALUES (" + "'" + teachEmail + "','" + teachName + "','" + teachPsw + "','" + role + "')";
+        try{
         sessionFactory.getCurrentSession().createSQLQuery(sql).executeUpdate();
         httpSession.setAttribute("userSession", user);
-        modelAndView.addObject("teacherModel", user);
         modelAndView.setViewName("teacher_page");
         return modelAndView;
+        } catch (Exception e){
+            request.setAttribute("error", true);
+            modelAndView.setViewName("index");
+            return modelAndView;
+        }
     }
 
     //    Отобразить все чаты сгрупированные по ид
     @Transactional
     @RequestMapping(value = "/show_my_chats", method = RequestMethod.POST)
-    public ModelAndView showMyChats() {
+    public ModelAndView showMyChats(HttpSession session,HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
-        List res = sessionFactory.getCurrentSession().createQuery("from Chat").list();
-//        List res = sessionFactory.getCurrentSession().createQuery("from Chat GROUP BY img").list();
-//        List<Chat> res = sessionFactory.getCurrentSession().createSQLQuery("Select * from reg.chat GROUP BY img").list();
-        modelAndView.addObject("res", res);
+        List res = sessionFactory.getCurrentSession().createQuery("from Chat GROUP BY img").list();
+        session.setAttribute("res", res);
         modelAndView.setViewName("chat");
         return modelAndView;
     }
@@ -130,9 +186,6 @@ public class LoginController {
         Query query = sessionFactory.getCurrentSession().createQuery("from Chat WHERE img = :img")
                 .setParameter("img", img);
         List<Chat> showThisChat = query.list();
-        List res = sessionFactory.getCurrentSession().createQuery("from Chat").list();
-//        List res = sessionFactory.getCurrentSession().createQuery("from Chat GROUP BY img").list();
-        modelAndView.addObject("res", res);
         modelAndView.addObject("showThisChat", showThisChat);
         modelAndView.setViewName("chat");
         return modelAndView;

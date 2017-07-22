@@ -34,6 +34,9 @@ public class User {
     @Column(name = "role", nullable = false)
     private String role;
 
+    @Column(name = "status", nullable = false)
+    private boolean status;
+
     @Transient
     private String confirmPassword;
 

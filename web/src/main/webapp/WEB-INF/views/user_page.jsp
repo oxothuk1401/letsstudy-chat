@@ -27,11 +27,6 @@
     <a href="${pageContext.request.contextPath}/show_profile"><p style="color: black" >PROFILE</p></a>
 </div>
 Вы успешно зарагестрированны в качестве студента<br>
-MOdelAtribute<br>
-    Ваше имя пользователя: ${userModel.username}<br>
-    Ваш email: ${userModel.email}<br>
-    Ваш пароль: ${userModel.password}<hr>
-Session<br>
     Ваше имя пользователя: ${sessionScope.userSession.username}<br>
     Ваш email: ${sessionScope.userSession.email}<br>
     Ваш пароль: ${sessionScope.userSession.password}<br>

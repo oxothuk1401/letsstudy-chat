@@ -29,14 +29,13 @@
         <div class="col-md-4" style="height: 250px;  border: solid #0d6db6; overflow: auto">
             <p>После загрузки сайта на хостинг </p>
             <p>не групируются сообщения я над этим работаю!</p>
-            <c:forEach items="${res}" var="res">
+            <c:forEach items="${sessionScope.res}" var="res">
                 <form action="show_this_chat" method="post">
                     <input type="hidden" name="img" value="${res.img}">
                     <div class="figure-img">
                         <img src="/resources/images/teacher/${res.img}" width="50" height="50">
                         <input class="btn-sm btn-warning" type="submit" value="Show chat with ${res.username}">
                     </div>
-
                 </form>
             </c:forEach>
         </div>

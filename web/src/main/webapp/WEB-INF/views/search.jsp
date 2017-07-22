@@ -39,7 +39,7 @@
             </div>
             <div class="h1 col-xs-12 col-md-3 centered">
                 <div class="row">
-                    <a href="/show_calendar"><img class="col-xs-3 col-md-3" src="/resources/images/icons/calendar.png"></a>
+                    <a href="#" id="calendar"><img class="col-xs-3 col-md-3" src="/resources/images/icons/calendar.png"></a>
                     <a href="#"><img class="col-xs-3 col-md-3" src="/resources/images/icons/notice.png"></a>
                     <a href="#"><img class="col-xs-3 col-md-3" src="/resources/images/icons/message.png"></a>
                     <a href="#"><img class="col-xs-3 col-md-3" src="/resources/images/icons/accaunt.png"></a>
@@ -47,6 +47,7 @@
             </div>
         </div>
     </header>
+
 
     <section>
         <div class="row">
@@ -278,8 +279,49 @@
                 <div class="col-xs-5 col-md-2" style="padding-top: 20px;">
                     <div style="text-align: center;">
                         <a href="/show_profile" title="Перейти на профиль"><img src="/resources/images/teacher/teacher1.png"></a>
-                        <a href="/show_video" title="Показать видео"><img src="/resources/images/icons/playVideo.png" style="position: relative; left: -20px; top: -22px;"></a>
-                        <h4 style="margin-top: -15px;">online</h4>
+                        <a href="#" title="Показать видео" id="video"><img src="/resources/images/icons/playVideo.png"
+                                                                           style="position: relative; left: -20px; top: -22px;"></a>
+
+                        <%-- нужно дорабоать--%>
+                        <c:if test="${not empty sessionScope.userSession.email}">
+                            <h4 style="margin-top: -15px; color: green;">online</h4>
+                        </c:if>
+                        <c:if test="${empty sessionScope.userSession.email}">
+                            <h4 style="margin-top: -15px; color: red;">offline</h4>
+                        </c:if>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="videoModal" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- teacher Modal video-->
+                        <div class="modal-content">
+                            <iframe width="590" height="320" src="https://www.youtube.com/embed/vVUViVOO1lQ?rel=0"
+                                    frameborder="0" allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="calendarModal" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- teacher Modal calendar-->
+                        <div class="modal-content">
+                            <img src="${pageContext.request.contextPath}/resources/images/temporary/calendar.jpg"
+                                 width="600" height="600">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="payModal" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- teacher Modal payment-->
+                        <div class="modal-content">
+                            <iframe frameborder="0" allowtransparency="true" scrolling="no"
+                                    src="https://money.yandex.ru/quickpay/shop-widget?account=410012266760751&quickpay=shop&payment-type-choice=on&mobile-payment-type-choice=on&writer=seller&targets=%D0%97%D0%B0+%D1%83%D1%80%D0%BE%D0%BA+1+%D1%83%D1%80%D0%BE%D0%BA&targets-hint=&default-sum=560&button-text=01&fio=on&mail=on&successURL="
+                                    width="450" height="198">
+                            </iframe>
+                        </div>
                     </div>
                 </div>
 
@@ -328,11 +370,12 @@
                         12$</b></p>
                     <h4 style="color: #1C3075;">бесплатный пробный<br> урок (30 мин)</h4>
                     <div class="row">
-                        <div class="col-xs-4 col-md-4"></div>
+                        <div class="col-xs-4 col-md-4"><a href="#" id="pay" title="Оплатить">
+                            <img src="/resources/images/icons/pay.png" class="btn" title="pay"></a>
+                        </div>
                         <div class="col-xs-2 col-md-2"><img src="/resources/images/icons/skype.png" class="btn" title="skype"></div>
-                        <%--<div class="col-xs-2 col-md-2" id="newMess"><img src="/resources/images/icons/chat.png" class="btn" title="чат"></div>--%>
-                        <div class="ol-xs-2 col-md-2 text-center">
-                            <button type="button" class="btn btn-default marginBottom15px" id="newMess"><img src="/resources/images/icons/chat.png" title="чат"></button>
+                        <div class="col-xs-2 col-md-2"><a href="#" id="newMess" title="Новое сообщение">
+                            <img src="/resources/images/icons/chat.png" class="btn"></a>
                         </div>
 
                         <!-- Modal for teacher-->
@@ -344,16 +387,19 @@
                                         <p class="text-center fontSize30px">Написать сообщение преподователю</p>
                                     </div>
                                     <div class="modal-body modalBodyStyle">
-                                        <form action="/send_mssg" role="form" method="POST" modelattribute="sendMessage">
+                                        <form action="/send_mssg" role="form" method="POST"
+                                              modelattribute="sendMessage">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="message" id="messText" placeholder="ваше сообщение" required>
+                                                <input type="text" class="form-control" name="message" id="messText"
+                                                       placeholder="ваше сообщение" required>
                                             </div>
                                             <input type="hidden" name="idTeacher" value="2/">
                                             <input type="hidden" name="date" value="2222/">
                                             <input type="hidden" name="username" value="VovaVovaVoava/">
                                             <input type="hidden" name="idStudent" value="1/">
                                             <input type="hidden" name="img" value="teacher4.png">
-                                            <button type="submit" class="btn btn-block btnBlack">Отправить сообщение</button>
+                                            <button type="submit" class="btn btn-block btnBlack">Отправить сообщение
+                                            </button>
                                         </form>
                                     </div>
                                 </div>
