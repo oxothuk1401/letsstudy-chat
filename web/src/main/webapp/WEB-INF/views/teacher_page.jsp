@@ -27,13 +27,8 @@
     <a href="${pageContext.request.contextPath}/show_profile"><p style="color: black" >PROFILE</p></a>
 </div>
 Вы успешно зарагестрированны в качестве учителя<br>
-MOdelAtribute<br>
-    Ваше имя пользователя: ${teacherModel.username}<br>
-    Ваш email: ${teacherModel.email}<br>
-    Ваш пароль: ${teacherModel.password}<hr>
-Session<br>
     Ваше имя пользователя: ${sessionScope.teacherSession.username}<br>
-    Ваш email: ${sessionScope.userSession.email}<br>
-    Ваш пароль: ${sessionScope.userSession.password}<br>
+    Ваш email: ${sessionScope.teacherSession.email}<br>
+    Ваш пароль: ${sessionScope.teacherSession.password}<br>
 </body>
 </html>

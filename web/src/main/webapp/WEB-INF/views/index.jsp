@@ -43,9 +43,9 @@
                         <button type="button" class="btn btn-default marginBottom15px" id="regTeacher"><local:message
                                 code="index.reg.teacher"/>
                         </button>
-                        <c:if test="${requestScope.error}">
-                            <h4 style="color: red;"> <local:message code="index.autoriz.user.error.duplicate"/></h4>
-                        </c:if>
+                        <%--<c:if test="${requestScope.error}">--%>
+                            <%--<h4 style="color: red;"> <local:message code="index.autoriz.user.error.duplicate"/></h4>--%>
+                        <%--</c:if>--%>
                     </div>
 
                     <!-- Modal for teacher-->
@@ -141,9 +141,9 @@
                         <button type="button" class="btn btn-default marginBottom15px" id="regStudent"><local:message
                                 code="index.reg.student"/>
                         </button>
-                        <c:if test="${requestScope.error}">
-                            <h4 style="color: red;"> <local:message code="index.autoriz.user.error.duplicate"/></h4>
-                        </c:if>
+                        <%--<c:if test="${requestScope.error}">--%>
+                            <%--<h4 style="color: red;"> <local:message code="index.autoriz.user.error.duplicate"/></h4>--%>
+                        <%--</c:if>--%>
                     </div>
 
                     <!-- Modal for student-->

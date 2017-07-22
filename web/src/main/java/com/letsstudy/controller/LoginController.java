@@ -7,12 +7,12 @@ import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
@@ -20,7 +20,6 @@ import java.util.List;
 
 @Transactional
 @Controller
-@SessionAttributes("sendMessage")
 public class LoginController {
 
     @Autowired
@@ -157,7 +156,7 @@ public class LoginController {
                 "VALUES (" + "'" + teachEmail + "','" + teachName + "','" + teachPsw + "','" + role + "')";
         try{
         sessionFactory.getCurrentSession().createSQLQuery(sql).executeUpdate();
-        httpSession.setAttribute("userSession", user);
+        httpSession.setAttribute("teacherSession", user);
         modelAndView.setViewName("teacher_page");
         return modelAndView;
         } catch (Exception e){
@@ -172,8 +171,13 @@ public class LoginController {
     @RequestMapping(value = "/show_my_chats", method = RequestMethod.POST)
     public ModelAndView showMyChats(HttpSession session,HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
-        List res = sessionFactory.getCurrentSession().createQuery("from Chat GROUP BY img").list();
+        List<Chat> res = sessionFactory.getCurrentSession().createQuery("from Chat GROUP BY img").list();
+        List<String> img = new ArrayList<>();
+        for (Chat resault: res){
+            img.add(resault.getImg());
+        }
         session.setAttribute("res", res);
+        session.setAttribute("img", img);
         modelAndView.setViewName("chat");
         return modelAndView;
     }

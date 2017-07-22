@@ -113,4 +113,17 @@ public class Chat {
     public void setImg(String img) {
         this.img = img;
     }
+
+    @Override
+    public String toString() {
+        return "Chat{" +
+                "idMssg=" + idMssg +
+                ", idStudent=" + idStudent +
+                ", idTeacher=" + idTeacher +
+                ", message='" + message + '\'' +
+                ", date='" + date + '\'' +
+                ", username='" + username + '\'' +
+                ", img='" + img + '\'' +
+                '}';
+    }
 }

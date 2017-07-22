@@ -1,0 +1,35 @@
+CREATE TABLE `chat` (
+  `id_mssg` int(11) NOT NULL AUTO_INCREMENT,
+  `Id_student` int(11) NOT NULL,
+  `id_teacher` int(11) NOT NULL,
+  `message` varchar(1000) DEFAULT NULL,
+  `date` varchar(30) DEFAULT NULL,
+  `username` varchar(30) DEFAULT NULL,
+  `img` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id_mssg`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+INSERT INTO `chat` VALUES (1,1,1,'adadawdawd','2017-07-11 09:01:23','Kate','teacher2.png'),(2,1,1,'I am here!!!','2017-07-11 09:23:02','Kate','teacher2.png'),(3,2,2,'Hi','2017-07-11 09:15:25','Vova','teacher4.png'),(4,3,3,'Vova hi this is Sergei','2017-07-11 15:15:25','Andrey','teacher5.png'),(5,4,4,'Hi Andry this is Sergei','2017-07-11 15:15:25','Misha','teacher6.png'),(6,5,5,'Hi Sergei this is Kate','2017-07-11 15:15:25','Dmitriy','teacher7.png'),(7,3,1,'wad','2321','Andrey','teacher5.png'),(8,4,1,'awcdacw','23223','Misha','teacher6.png'),(9,4,1,'GHbdntnesfe','2017-07-11 09:01:23','Misha','teacher6.png'),(10,1,1,'before','2017-07-11 08:01:23','Kate','teacher2.png');
+
+
+
+
+
+CREATE TABLE `users` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `phone_number` varchar(255) DEFAULT NULL,
+  `surname` varchar(255) DEFAULT NULL,
+  `user_name` varchar(255) NOT NULL,
+  `role` varchar(10) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UK_avh1b2ec82audum2lyjx2p1ws` (`email`),
+  UNIQUE KEY `UK_2wed70dxbt5mep9rgdoydv1yb` (`phone_number`)
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
+
+INSERT INTO `users` VALUES (4,'administrator@gmail.com','administrator','administrator','+375333333333','administrator','administrator','admin',0),(39,'teacher@gmail.com',NULL,'teacher',NULL,NULL,'teacher','teacher',1),(40,'student@gmail.com',NULL,'student',NULL,NULL,'student','user',0);
+
+
